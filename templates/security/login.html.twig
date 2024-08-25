@@ -6,7 +6,7 @@
     <h1>Login</h1>
 
     {% if error %}
-        <div>{{ error.messageKey }}</div>
+        <div>{{ error.messageKey | trans(error.messageData, "security") }}</div>
     {% endif %}
     
 
