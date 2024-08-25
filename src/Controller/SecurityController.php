@@ -10,11 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
     #[Route('/signup', name: 'signup')]
-    public function index(EntityManagerInterface $em, Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    public function signup(EntityManagerInterface $em, Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
         $userForm = $this->createForm(UserType::class, $user);
@@ -29,6 +30,20 @@ class SecurityController extends AbstractController
 
         return $this->render('security/signup.html.twig', [
             "form" => $userForm->createView()
+        ]);
+    }
+
+    #[Route('/login', name: 'login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $username = $authenticationUtils->getLastUsername();
+
+        // dd($username);
+
+        return $this->render("security/login.html.twig", [
+            "error" => $error,
+            "username" => $username
         ]);
     }
 }
