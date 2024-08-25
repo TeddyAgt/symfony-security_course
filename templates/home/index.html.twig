@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <h1>Bonjour {{ app.user.username }}</h1>
     {% else %}
         <h1>Bonjour</h1>

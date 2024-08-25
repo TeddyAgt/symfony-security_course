@@ -21,6 +21,11 @@
             <input type="password" id="password" name="_password">
         </div>
 
+        <label for="remember_me">
+            <input type="checkbox" name="_remember_me" id="remember_me"> Se souvenir de moi
+        </label>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token("authenticate") }}">
+
         <button type="submit">Log me in</button>
     </form>
 
