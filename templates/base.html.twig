@@ -15,9 +15,15 @@
         <header>
             <span>Security</span>
             <nav>
-                <a href="{{ path("signup") }}">Signup</a>
-                <a href="{{ path("login") }}">Login</a>
-                <a href="{{ path("logout") }}">Logout</a>
+                    <a href="{{ path("home") }}">Accueil</a>
+                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                    <a href="{{ path("profile") }}">Profile</a>
+                    <a href="{{ path("logout") }}">Logout</a>
+                {% else %}
+                    <a href="{{ path("signup") }}">Signup</a>
+                    <a href="{{ path("login") }}">Login</a>
+                {% endif %}
+                
             </nav>
         </header>
         {% block body %}{% endblock %}
